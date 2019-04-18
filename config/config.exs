@@ -9,10 +9,7 @@ use Mix.Config
 
 # Configures the endpoint
 config :line_server, LineServerWeb.Endpoint,
-  url: [host: "localhost"],
-  secret_key_base: "Zmbsui7GywLkya8KpMee5oxRAZ/j7d/vsXpuVzAMSIInvZ7ejSg+ZeWn6WpO3WVn",
-  render_errors: [view: LineServerWeb.ErrorView, accepts: ~w(json)],
-  pubsub: [name: LineServer.PubSub, adapter: Phoenix.PubSub.PG2]
+  url: [host: "localhost"]
 
 # Configures Elixir's Logger
 config :logger, :console,
