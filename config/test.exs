@@ -6,5 +6,8 @@ config :line_server, LineServerWeb.Endpoint,
   http: [port: 4002],
   server: false
 
+config :line_server,
+  file_path: "test/support/basicfile"
+
 # Print only warnings and errors during test
 config :logger, level: :warn

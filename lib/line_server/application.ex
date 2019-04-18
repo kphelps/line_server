@@ -6,12 +6,11 @@ defmodule LineServer.Application do
   use Application
 
   def start(_type, _args) do
-    # List all child processes to be supervised
+    index_bootstrap(file_path())
+
     children = [
       # Start the endpoint when the application starts
       LineServerWeb.Endpoint
-      # Starts a worker by calling: LineServer.Worker.start_link(arg)
-      # {LineServer.Worker, arg},
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
@@ -25,5 +24,14 @@ defmodule LineServer.Application do
   def config_change(changed, _new, removed) do
     LineServerWeb.Endpoint.config_change(changed, removed)
     :ok
+  end
+
+  defp index_bootstrap(file_path) do
+    {:ok, index} = LineServer.IndexCreator.create(file_path)
+    LineServer.IndexRepository.save(index)
+  end
+
+  defp file_path do
+    Application.get_env(:line_server, :file_path)
   end
 end
