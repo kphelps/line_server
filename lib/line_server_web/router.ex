@@ -1,11 +1,7 @@
 defmodule LineServerWeb.Router do
   use LineServerWeb, :router
 
-  pipeline :api do
-    plug :accepts, ["json"]
-  end
-
-  scope "/api", LineServerWeb do
-    pipe_through :api
+  scope "/", LineServerWeb do
+    get "/lines/:line_number", LineController, :get_line
   end
 end
