@@ -1,5 +1,4 @@
 defmodule LineServer.IndexCreator do
-
   def create(file_path) do
     if File.exists?(file_path) do
       index = File.stream!(file_path)
@@ -14,7 +13,7 @@ defmodule LineServer.IndexCreator do
       if index == [] do
         {:err, :empty}
       else
-        index |> Enum.into(%{0 => 0})
+        {:ok, index |> Enum.into(%{0 => 0})}
       end
     else
       {:err, :nofile}

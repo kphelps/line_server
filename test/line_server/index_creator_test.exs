@@ -15,18 +15,18 @@ defmodule LineServer.IndexCreatorTest do
   end
 
   test "the index indexes all the lines in the file (correct length is one more than # of lines)" do
-    index = Subject.create(@basicfile)
+    {:ok, index} = Subject.create(@basicfile)
     assert Map.size(index) == 7
   end
 
   test "the last index value is the total bytes of the file contents" do
     {:ok, file} = File.read(@basicfile)
-    index = Subject.create(@basicfile)
+    {:ok, index} = Subject.create(@basicfile)
     assert byte_size(file) == index[Map.size(index) - 1]
   end
 
   test "each index line value has the total number of bytes where that line ends" do
-    index = Subject.create(@basicfile)
+    {:ok, index} = Subject.create(@basicfile)
 
     assert index[0] == 0
     assert index[1] == 1
@@ -41,7 +41,7 @@ defmodule LineServer.IndexCreatorTest do
   the subtraction of an index line value with the previous index line value
   equals the number of bytes of that line in the file
   """ do
-    index = Subject.create(@basicfile)
+    {:ok, index} = Subject.create(@basicfile)
     assert index[1] - index[0] == 1
     assert index[2] - index[1] == 2
     assert index[3] - index[2] == 3
@@ -52,13 +52,13 @@ defmodule LineServer.IndexCreatorTest do
 
   describe "when the file has only one line" do
     test "the index only has two entries" do
-      index = Subject.create(@onelinefile)
+      {:ok, index} = Subject.create(@onelinefile)
       assert Map.size(index) == 2
     end
 
     test "the last index value is the total bytes of the file contents" do
       {:ok, file} = File.read(@basicfile)
-      index = Subject.create(@basicfile)
+      {:ok, index} = Subject.create(@basicfile)
       assert byte_size(file) == index[Map.size(index) - 1]
    end
   end
