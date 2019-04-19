@@ -9,7 +9,8 @@ use Mix.Config
 
 # Configures the endpoint
 config :line_server, LineServerWeb.Endpoint,
-  url: [host: "localhost"]
+  url: [host: "localhost"],
+  server: true
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -20,7 +21,7 @@ config :logger, :console,
 config :phoenix, :json_library, Jason
 
 config :line_server,
-  file_path: System.get_env("file_path") || "defaultfile"
+  file_path: {:system, "FILE_PATH", default: "defaultfile"}
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

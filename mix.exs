@@ -34,7 +34,9 @@ defmodule LineServer.MixProject do
     [
       {:phoenix, "~> 1.4.3"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:distillery, "~> 2.0"},
+      {:config_tuples, "~> 0.2.0"}
     ]
   end
 end
